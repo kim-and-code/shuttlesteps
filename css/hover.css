@@ -1,0 +1,76 @@
+@media screen and (min-width: 51rem) and (hover: hover) {
+
+    /* Disable dropdown for active link. */
+    /* Dropdown visibility on hover is restored on pointer move (see active_links.js) */
+    html.mouse_or_pen_mode .li_with_dropdown.dropdown_disabled:hover>.dropdown_menu {
+        display: none !important;
+    }
+
+    /* Prevent FOUC during page navigation */
+    html.mouse_or_pen_mode nav>ul>li:hover:not(.active):not(.disable_hover),
+    nav>ul>li.pending {
+        background-color: var(--bar_li_hover_bg);
+        color: var(--bar_li_hover_text);
+    }
+
+    html.mouse_or_pen_mode .dropdown_menu li:hover {
+        background-color: var(--bar_dropdown_menu_li_hover_bg);
+    }
+
+    /* Hide dropdown when the hover media query becomes active */
+    .li_with_dropdown:not(:hover) .dropdown_menu {
+        display: none;
+    }
+
+    html.mouse_or_pen_mode .li_with_dropdown:hover:not(.disable_hover) .dropdown_menu {
+        display: block;
+    }
+
+    /* Manage dual-input mode (see dual_input.js) */
+    .li_with_dropdown.show_dropdown .dropdown_menu,
+    .li_with_dropdown.show_dropdown_hover_problem .dropdown_menu {
+        display: block;
+    }
+
+    /* Manage dual-input mode (see dual_input.js) */
+    .li_with_dropdown.show_dropdown:not(.active),
+    .li_with_dropdown.show_dropdown_hover_problem:not(.active) {
+        background-color: var(--bar_li_hover_bg);
+    }
+
+    .li_with_dropdown span.nav_arrowhead {
+        display: none;
+    }
+
+    .li_with_dropdown>a {
+        pointer-events: initial;
+    }
+
+    .menu_heading {
+        display: none;
+    }
+
+    .dropdown_menu li:not(.menu_heading) a {
+        padding-left: 2.5rem;
+    }
+
+    html.mouse_or_pen_mode.light_mode .topics div:hover,
+    html.mouse_or_pen_mode.light_mode .topics li:not(:has(ul)):hover {
+        color: var(--topics_text_hover);
+    }
+
+    html.mouse_or_pen_mode.dark_mode .topics div:hover,
+    html.mouse_or_pen_mode.dark_mode .topics li:not(:has(ul)):hover {
+        text-shadow: var(--topics_text_shadow_hover) 0 0 15px;
+    }
+
+    html.mouse_or_pen_mode .topics_button:hover {
+        background-color: var(--topics_button_bg_color_hover);
+        color: var(--topics_button_text_color_hover);
+    }
+
+    html.mouse_or_pen_mode .topics_button:active {
+        background-color: var(--topics_button_bg_color_active);
+        color: var(--topics_button_text_color_active);
+    }
+}

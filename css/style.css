@@ -1,0 +1,772 @@
+@font-face {
+    font-family: "Orbitron";
+    src: url("/fonts/orbitron-v35-latin-800.woff2") format("woff2");
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --bar_height: 4rem;
+    /* Accounts for the 1px border-bottom because the navbar uses box-sizing: content-box */
+    --ads_offset: calc(var(--bar_height) + 1px);
+    --ads_width: 300px;
+    --bar_and_anchor_offset: var(--ads_offset);
+    --main_padding: 20px;
+    --footer_height: 3rlh;
+
+    /* TODO: Clean up colors (remove unused colors, rename, and order) */
+    /* TODO: Add hex fallback for colors */
+
+    --green_100_30: hsl(127, 100%, 30%);
+    --green_100_50: hsl(127, 100%, 50%);
+    --original_green: hsl(127, 100%, 70%);
+    --green_100_80: hsl(127, 100%, 80%);
+
+    --green_50_30: hsl(127, 50%, 30%);
+    --green_50_50: hsl(127, 50%, 50%);
+    --green_50_70: hsl(127, 50%, 70%);
+    --green_50_80: hsl(127, 50%, 80%);
+    --green_50_90: hsl(127, 50%, 90%);
+
+    --bluegreen_100_50: hsl(157, 100%, 50%);
+    --bluegreen_50_20: hsl(157, 50%, 20%);
+    --bluegreen_30_20: hsl(157, 30%, 20%);
+    --bluegreen_40_30: hsl(157, 40%, 30%);
+    --bluegreen_45_35: hsl(157, 45%, 35%);
+
+    --purple_100_50: hsl(257, 100%, 50%);
+    --purple_100_60: hsl(257, 100%, 60%);
+    --original_purple: hsl(257, 100%, 70%);
+    --purple_100_80: hsl(257, 100%, 80%);
+
+    --purple_50_50: hsl(257, 50%, 50%);
+    --purple_50_70: hsl(257, 50%, 70%);
+    --purple_50_80: hsl(257, 50%, 80%);
+
+    --purpleblue_100_30: hsl(227, 100%, 30%);
+    --purpleblue_100_50: hsl(227, 100%, 50%);
+    --purpleblue_100_70: hsl(227, 100%, 70%);
+    --purpleblue_100_80: hsl(227, 100%, 80%);
+
+    --purpleblue2_100_70: hsl(242, 100%, 70%);
+
+    --purpleblue_50_50: hsl(227, 50%, 50%);
+    --purpleblue_50_70: hsl(227, 50%, 70%);
+    --purpleblue_50_80: hsl(227, 50%, 80%);
+    --purpleblue_50_90: hsl(227, 50%, 90%);
+
+    --blue_100_50: hsl(197, 100%, 50%);
+    --blue_100_70: hsl(197, 100%, 70%);
+    --blue_100_80: hsl(197, 100%, 80%);
+
+    --bluegreen_extra_50_20: hsl(187, 50%, 20%);
+
+    --blue_50_50: hsl(197, 50%, 50%);
+    --blue_50_70: hsl(197, 50%, 70%);
+    --blue_50_80: hsl(197, 50%, 80%);
+    --blue_50_90: hsl(197, 50%, 90%);
+
+    /* TODO: Are these colors still used? */
+
+    --bluegreen50_shade4: hsl(157, 50%, 10%);
+    --bluegreen50_shade3: hsl(157, 50%, 20%);
+    --bluegreen50_shade2: hsl(157, 50%, 30%);
+    --bluegreen50_shade1: hsl(157, 50%, 40%);
+    --bluegreen50: hsl(157, 50%, 50%);
+    --bluegreen50_tint1: hsl(157, 50%, 60%);
+    --bluegreen50_tint2: hsl(157, 50%, 70%);
+    --bluegreen50_tint3: hsl(157, 50%, 80%);
+    --bluegreen50_tint4: hsl(157, 50%, 90%);
+
+    --green50_shade4: hsl(127, 50%, 10%);
+    --green50_shade3: hsl(127, 50%, 20%);
+    --green50_shade2: hsl(127, 50%, 30%);
+    --green50_shade1: hsl(127, 50%, 40%);
+    --green50: hsl(127, 50%, 50%);
+    --green50_tint1: hsl(127, 50%, 60%);
+    --green50_tint2: hsl(127, 50%, 70%);
+    --green50_tint3: hsl(127, 50%, 80%);
+    --green50_tint4: hsl(127, 50%, 90%);
+
+    --blue50_shade4: hsl(187, 50%, 10%);
+    --blue50_shade3: hsl(187, 50%, 20%);
+    --blue50_shade2: hsl(187, 50%, 30%);
+    --blue50_shade1: hsl(187, 50%, 40%);
+    --blue50: hsl(187, 50%, 50%);
+    --blue50_tint1: hsl(187, 50%, 60%);
+    --blue50_tint2: hsl(187, 50%, 70%);
+    --blue50_tint3: hsl(187, 50%, 80%);
+    --blue50_tint4: hsl(187, 50%, 90%);
+
+    --bluegreen100_shade4: hsl(157, 100%, 10%);
+    --bluegreen100_shade3: hsl(157, 100%, 20%);
+    --bluegreen100_shade2: hsl(157, 100%, 30%);
+    --bluegreen100_shade1: hsl(157, 100%, 40%);
+    --bluegreen100: hsl(157, 100%, 50%);
+    --bluegreen100_tint1: hsl(157, 100%, 60%);
+    --bluegreen100_tint2: hsl(157, 100%, 70%);
+    --bluegreen100_tint3: hsl(157, 100%, 80%);
+    --bluegreen100_tint4: hsl(157, 100%, 90%);
+
+    --green100_shade4: hsl(127, 100%, 10%);
+    --green100_shade3: hsl(127, 100%, 20%);
+    --green100_shade2: hsl(127, 100%, 30%);
+    --green100_shade1: hsl(127, 100%, 40%);
+    --green100: hsl(127, 100%, 50%);
+    --green100_tint1: hsl(127, 100%, 60%);
+    --green100_tint2: hsl(127, 100%, 70%);
+    --green100_tint3: hsl(127, 100%, 80%);
+    --green100_tint4: hsl(127, 100%, 90%);
+
+    --blue100_shade4: hsl(187, 100%, 10%);
+    --blue100_shade3: hsl(187, 100%, 20%);
+    --blue100_shade2: hsl(187, 100%, 30%);
+    --blue100_shade1: hsl(187, 100%, 40%);
+    --blue100: hsl(187, 100%, 50%);
+    --blue100_tint1: hsl(187, 100%, 60%);
+    --blue100_tint2: hsl(187, 100%, 70%);
+    --blue100_tint3: hsl(187, 100%, 80%);
+    --blue100_tint4: hsl(187, 100%, 90%);
+}
+
+body {
+    background-color: var(--body_bg_color);
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    /* TODO: Is this necessary? */
+    line-height: 1.2;
+}
+
+/* TODO: Ensure consistent variable naming (e.g., card_border_color instead of card_border) */
+
+.light_mode {
+    --body_bg_color: white;
+
+    --top_level_border_color: black;
+
+    --bar_bg: var(--green_50_80);
+    --bar_text: black;
+    --bar_li_hover_bg: var(--green_50_70);
+    --bar_li_hover_text: black;
+    --active_link_bg: var(--purpleblue_50_70);
+    --bar_dropdown_menu_bg: white;
+    --bar_dropdown_menu_text: black;
+    --bar_dropdown_menu_li_hover_bg: var(--green_50_90);
+
+    --main_text: black;
+
+    --card_border: #bbb;
+    --card_border_activated: var(--purple_50_50);
+    --card_shadow: 0 10px 20px rgb(0 0 0 / 80%);
+
+    --topics_bg: var(--green_50_90);
+    --topics_text: black;
+    --topics_border: black;
+    --topics_text_hover: var(--bluegreen_extra_50_20);
+    --topics_button_bg_color: var(--purple_100_80);
+    --topics_button_text_color: black;
+    --topics_button_bg_color_active: var(--purple_100_60);
+    --topics_button_text_color_active: white;
+    --topics_button_bg_color_hover: var(--original_purple);
+    --topics_button_text_color_hover: white;
+
+    --footer_bg: #aaa;
+    --footer_text: black;
+}
+
+.dark_mode {
+    --body_bg_color: #222;
+
+    --top_level_border_color: white;
+
+    --bar_bg: var(--bluegreen_30_20);
+    --bar_text: white;
+    --bar_li_hover_bg: var(--bluegreen_40_30);
+    --bar_li_hover_text: white;
+    --active_link_bg: var(--purpleblue2_100_70);
+    --bar_dropdown_menu_bg: #444;
+    --bar_dropdown_menu_text: white;
+    --bar_dropdown_menu_li_hover_bg: var(--bluegreen_45_35);
+
+    --main_text: white;
+
+    --card_border: var(--body_bg_color);
+    --card_border_activated: var(--purpleblue_100_50);
+    --card_shadow: 10px 0 20px rgb(255 255 255 / 20%),
+        -10px 0 20px rgb(255 255 255 / 20%), 0 10px 20px rgb(255 255 255 / 20%),
+        0 -10px 20px rgb(255 255 255 / 20%);
+
+    --topics_bg: var(--bluegreen_50_20);
+    --topics_text: white;
+    --topics_border: var(--blue_100_70);
+    --topics_text_shadow_hover: var(--bluegreen_100_50);
+    --topics_button_bg_color: var(--purple_100_60);
+    --topics_button_text_color: white;
+    --topics_button_bg_color_active: var(--purple_100_80);
+    --topics_button_text_color_active: black;
+    --topics_button_bg_color_hover: var(--original_purple);
+    --topics_button_text_color_hover: white;
+
+    --footer_bg: #444;
+    --footer_text: white;
+}
+
+#bar {
+    z-index: 2;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: var(--bar_height);
+    display: grid;
+    grid-template-columns: 1fr min-content 1fr;
+    grid-template-rows: var(--bar_height) auto;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bar_bg);
+    border-bottom: 1px solid var(--top_level_border_color);
+}
+
+#hamburger_menu {
+    margin: 0 1.25rem;
+    cursor: pointer;
+    width: min-content
+}
+
+#hamburger_menu div {
+    width: 2rem;
+    height: 0.25rem;
+    margin: 0.25rem 0;
+    background-color: var(--main_text);
+}
+
+#bar:not(.extended_bar) {
+    box-sizing: content-box;
+}
+
+#bar.extended_bar~*:not(.ads) {
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+/* Disable scrolling when the bar is extended */
+body:has(#bar.extended_bar) {
+    overflow: hidden;
+}
+
+#bar.extended_bar {
+    height: fit-content;
+    /* Make the extended menu scrollable if the menu content does not fit within 100vh */
+    max-height: 100vh;
+    overflow-y: auto;
+    /* TODO: Implement scrollbar gutter */
+    /* Reserve space for the scrollbar to prevent layout jumps */
+    /* scrollbar-gutter: stable both-edges; */
+}
+
+#bar.extended_bar #nav_ul {
+    display: flex;
+}
+
+#bar.extended_bar #hamburger_menu_bar_1 {
+    transform: translate(0, 0.5rem) rotate(45deg);
+}
+
+#bar.extended_bar #hamburger_menu_bar_2 {
+    visibility: hidden;
+}
+
+#bar.extended_bar #hamburger_menu_bar_3 {
+    transform: translate(0, -0.5rem) rotate(-45deg);
+}
+
+.home_narrow_screen,
+.home_wide_screen {
+    display: flex;
+    align-items: center;
+}
+
+.home_narrow_screen {
+    text-decoration: none;
+    color: var(--bar_text);
+}
+
+.home_wide_screen {
+    /* Align the logo with the rest of the content (override padding-left set on nav a) */
+    /* Calculation: main padding-left + approximate built-in font spacing - 
+    ((intrinsic logo padding) * bar height) */
+    padding-left: calc(var(--main_padding) + 2px - (0.2 * var(--bar_height)));
+}
+
+li:has(.home_wide_screen) {
+    display: none;
+}
+
+.logo {
+    height: var(--bar_height);
+    aspect-ratio: 1 / 1;
+}
+
+.brand_name {
+    font-family: "Orbitron", "Trebuchet MS", sans-serif;
+    font-weight: 800;
+    font-size: 1.5em;
+    letter-spacing: 0.05em;
+    transform: scaleY(1.2);
+}
+
+.steps {
+    letter-spacing: 0.05em;
+}
+
+nav {
+    grid-column-start: 1;
+    grid-column-end: -1;
+    grid-row: 2;
+    border-top: 1px solid var(--top_level_border_color);
+}
+
+nav ul {
+    display: none;
+    flex-direction: column;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    height: var(--bar_height);
+}
+
+nav li.visible_dropdown {
+    height: auto;
+}
+
+nav li.visible_dropdown>a {
+    height: var(--bar_height);
+}
+
+nav>ul>li.active {
+    background-color: var(--active_link_bg);
+}
+
+nav a {
+    display: inline-block;
+    padding: 0 2.5rem;
+    text-decoration: none;
+    white-space: nowrap;
+    width: 100%;
+    height: 100%;
+    align-content: center;
+}
+
+nav>ul>li>a {
+    color: var(--bar_text);
+}
+
+.li_with_dropdown {
+    /* Set child element to position: absolute and min-width: 100% */
+    position: relative;
+}
+
+.li_with_dropdown>a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dropdown_menu {
+    display: none;
+    /* TODO: Is this necessary? */
+    position: static;
+    background-color: var(--bar_dropdown_menu_bg);
+    min-width: 100%;
+}
+
+.dropdown_menu ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown_menu li {
+    overflow-x: auto;
+}
+
+.dropdown_menu a {
+    color: var(--bar_dropdown_menu_text);
+}
+
+.li_with_dropdown.visible_dropdown .dropdown_menu {
+    display: block;
+}
+
+.li_with_dropdown:not(.visible_dropdown) a span.nav_arrowhead::after {
+    content: "\2BC6";
+}
+
+.li_with_dropdown.visible_dropdown a span.nav_arrowhead::after {
+    content: "\2BC5";
+}
+
+.li_with_dropdown>a {
+    pointer-events: none;
+}
+
+.li_with_dropdown {
+    cursor: pointer;
+}
+
+.menu_heading {
+    text-align: center;
+}
+
+.li_with_dropdown.visible_dropdown>a>span.heading_above_dropdown {
+    visibility: hidden;
+}
+
+#dark_mode_button {
+    color: var(--bar_text);
+    margin: 0 1.25rem;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: min-content;
+    justify-self: right;
+}
+
+.light_mode #dark_mode_button::after {
+    content: "\263E";
+}
+
+.dark_mode #dark_mode_button::after {
+    content: "\263C";
+}
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+}
+
+.center {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+main {
+    margin-top: var(--bar_and_anchor_offset);
+    padding: 0 var(--main_padding) var(--main_padding);
+    color: var(--main_text);
+}
+
+.anchor::before {
+    display: block;
+    content: "";
+    visibility: hidden;
+    height: var(--bar_and_anchor_offset);
+    margin-top: calc((-1) * var(--bar_and_anchor_offset));
+}
+
+.ads {
+    border: 10px solid #888;
+    height: 200px;
+    background-color: white;
+}
+
+custom-footer {
+    display: block;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    font-size: 1rem;
+    height: var(--footer_height);
+    background-color: var(--footer_bg);
+    color: var(--footer_text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid var(--top_level_border_color);
+}
+
+footer a {
+    text-decoration: none;
+    color: var(--main_text);
+}
+
+.note {
+    font-style: italic;
+}
+
+.indented {
+    padding-left: 1rem;
+}
+
+.intro_header p {
+    font-weight: bold;
+}
+
+.card_grid {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.card {
+    border: 2px solid var(--card_border);
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+    transition-property: transform, z-index, box-shadow;
+    transition-duration: 1s, 0s, 1s;
+    /* Using transition to delay z-index changes from auto to a number does not work, 
+    but changing from 0 to another number does. */
+    z-index: 0;
+    cursor: pointer;
+    color: black;
+}
+
+.card.activated {
+    border-color: var(--card_border_activated);
+}
+
+.dark_mode .card.activated {
+    outline: 2px solid white;
+}
+
+.card_title {
+    background-color: white;
+    padding: 5px;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    /* TODO: Are vendor prefixes -o- and -ms necessary? */
+    text-overflow: ellipsis;
+    font-weight: normal;
+    font-size: 1rem;
+}
+
+.card figure {
+    margin: 0;
+}
+
+.media_container {
+    aspect-ratio: 16 / 9;
+    position: relative;
+    overflow: hidden;
+}
+
+.video,
+.thumbnail {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    /* Prevent subpixel rendering issues (thin lines around thumbnails and videos in some browsers) */
+    transform: scale(1.05);
+}
+
+.thumbnail {
+    background-size: cover;
+    background-position: center;
+}
+
+.video {
+    display: none;
+}
+
+.topics {
+    --grid_item_border_width: 1px;
+    --grid_item_padding: 12px;
+    display: grid;
+    gap: 10px;
+    list-style-type: none;
+    padding: 0;
+    font-size: 1.5rem;
+    grid-auto-rows: calc(1lh + (2 * var(--grid_item_padding)) + (2 * var(--grid_item_border_width)));
+    margin-bottom: 100vh;
+}
+
+.topics ul {
+    list-style-type: none;
+    margin-top: 5px;
+    padding-left: 20px;
+}
+
+.topics li.collapsed>ul {
+    display: none;
+}
+
+.topics li.collapsed>div>span.topics_arrowhead::after {
+    content: "\2BC6";
+}
+
+.topics li.expanded>div>span.topics_arrowhead::after {
+    content: "\2BC5";
+}
+
+.topics>* {
+    border: var(--grid_item_border_width) solid var(--topics_border);
+    border-radius: 10px;
+    background-color: var(--topics_bg);
+    padding: var(--grid_item_padding);
+    color: var(--topics_text);
+}
+
+.topics>li>ul>li {
+    padding: 8px;
+}
+
+.topics>li>ul>li>ul>li {
+    padding: 4px;
+}
+
+.topics>li li {
+    font-size: 0.9em;
+    border: 1px solid var(--topics_border);
+    border-radius: 5px;
+    margin: 2px 0;
+}
+
+/* TODO: Use a class for divs inside .topics */
+
+/* TODO: Are these selectors correct? */
+.topics div,
+.topics li:not(:has(ul)) {
+    cursor: pointer;
+}
+
+.topics div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topics_arrowhead {
+    font-size: 1rem;
+}
+
+.topics_button {
+    border: 1px solid black;
+    border-radius: calc(infinity * 1px);
+    padding: 10px;
+    cursor: pointer;
+    background-color: var(--topics_button_bg_color);
+    color: var(--main_text);
+    min-width: 100px;
+    font-size: 1rem;
+}
+
+.brand_name {
+    display: none;
+}
+
+@media screen and (min-width: 26rem) {
+    .brand_name {
+        /* Flex items are blockified, so display should not be inline here */
+        display: block;
+    }
+}
+
+@media screen and (min-width: 51rem) {
+    #bar {
+        grid-template-columns: 0 0 min-content 1fr;
+        grid-template-rows: var(--bar_height);
+    }
+
+    #hamburger_menu {
+        display: none;
+    }
+
+    .home_narrow_screen {
+        display: none;
+    }
+
+    #dark_mode_button {
+        grid-column-start: 4;
+        justify-self: left;
+    }
+
+    li:has(.home_wide_screen) {
+        display: block;
+    }
+
+    nav {
+        grid-column-start: 1;
+        grid-column-end: 4;
+        grid-row-start: 1;
+        border-top: 0;
+    }
+
+    nav>ul {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .dropdown_menu {
+        position: absolute;
+        box-shadow: 0 10px 20px rgb(0 0 0 / 50%);
+        left: min(0px, var(--result));
+    }
+
+    .li_with_dropdown span.nav_arrowhead {
+        /* TODO: Is this necessary? */
+        position: static;
+        margin-left: 1em;
+    }
+
+    .menu_heading {
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .dropdown_menu li:not(.menu_heading) a {
+        padding-left: 4em;
+    }
+
+    .li_with_dropdown.visible_dropdown>a>span.heading_above_dropdown {
+        visibility: visible;
+    }
+
+    .topics {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-flow: dense;
+    }
+
+    .topics>li:nth-child(odd) {
+        grid-column: 1;
+    }
+
+    .topics>li:nth-child(even) {
+        grid-column: 2;
+    }
+
+    main {
+        margin-right: var(--ads_width);
+    }
+
+    main.privacy_policy {
+        margin-right: 0;
+    }
+
+    .ads {
+        height: initial;
+        width: var(--ads_width);
+        /* Ensure the ads element appears above other content */
+        z-index: 3;
+        position: fixed;
+        right: 0;
+        top: var(--ads_offset);
+        bottom: var(--footer_height);
+    }
+}
