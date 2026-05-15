@@ -1,6 +1,6 @@
 @font-face {
     font-family: "Orbitron";
-    src: url("/fonts/orbitron-v35-latin-800.woff2") format("woff2");
+    src: url("../fonts/orbitron-v35-latin-800.woff2") format("woff2");
     font-weight: 800;
     font-style: normal;
     font-display: swap;
@@ -214,6 +214,18 @@ body {
 
     --footer_bg: #444;
     --footer_text: white;
+}
+
+.dark_mode main a:link {
+    color: rgb(114, 182, 204);
+}
+
+.dark_mode main a:visited {
+    color: rgb(178, 129, 184);
+}
+
+.dark_mode main a:active {
+    color: red;
 }
 
 #bar {
@@ -496,9 +508,56 @@ custom-footer {
     border-top: 1px solid var(--top_level_border_color);
 }
 
+footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
 footer a {
     text-decoration: none;
     color: var(--main_text);
+}
+
+.button {
+    border: 1px solid black;
+    border-radius: calc(infinity * 1px);
+    padding: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#cookie_banner {
+    background-color: rgb(0 0 0 / 80%);
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#cookie_banner_content {
+    background-color: white;
+    width: min(500px, 90%);
+    padding: 32px;
+    border-radius: 16px;
+}
+
+#cookie_button_container {
+    display: flex;
+    justify-content: space-between;
+}
+
+#accept_button {
+    background-color: blue;
+    color: white;
 }
 
 .note {
@@ -516,10 +575,14 @@ footer a {
 .card_grid {
     display: grid;
     gap: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     list-style: none;
     margin: 0;
     padding: 0;
+}
+
+.buffer {
+    height: 200px;
 }
 
 .card {
@@ -528,7 +591,7 @@ footer a {
     overflow: hidden;
     background-color: white;
     transition-property: transform, z-index, box-shadow;
-    transition-duration: 1s, 0s, 1s;
+    transition-duration: 0.5s, 0s, 0.5s;
     /* Using transition to delay z-index changes from auto to a number does not work, 
     but changing from 0 to another number does. */
     z-index: 0;
@@ -564,6 +627,8 @@ footer a {
     aspect-ratio: 16 / 9;
     position: relative;
     overflow: hidden;
+    display: block;
+    text-decoration: none;
 }
 
 .video,
@@ -573,16 +638,57 @@ footer a {
     position: absolute;
     inset: 0;
     /* Prevent subpixel rendering issues (thin lines around thumbnails and videos in some browsers) */
-    transform: scale(1.05);
-}
-
-.thumbnail {
-    background-size: cover;
-    background-position: center;
+    /* transform: scale(1.05); */
 }
 
 .video {
-    display: none;
+    opacity: 0;
+    transition: opacity 300ms ease;
+}
+
+.video.opaque {
+    opacity: 1;
+}
+
+.video_container, .video_placeholder {
+    width: auto;
+    height: auto;
+    max-height: 70vh;
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
+}
+
+.large_video {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.video_placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.video_placeholder p {
+    text-align: center;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.light_mode .video_placeholder {
+    background-color: #222;
+    color: white;
+}
+
+.dark_mode .video_placeholder {
+    background-color: #aaa;
+    color: black;
 }
 
 .topics {
@@ -608,11 +714,11 @@ footer a {
 }
 
 .topics li.collapsed>div>span.topics_arrowhead::after {
-    content: "\2BC6";
+    content: "\25BC";
 }
 
 .topics li.expanded>div>span.topics_arrowhead::after {
-    content: "\2BC5";
+    content: "\25B2";
 }
 
 .topics>* {
@@ -657,14 +763,9 @@ footer a {
 }
 
 .topics_button {
-    border: 1px solid black;
-    border-radius: calc(infinity * 1px);
-    padding: 10px;
-    cursor: pointer;
     background-color: var(--topics_button_bg_color);
     color: var(--main_text);
     min-width: 100px;
-    font-size: 1rem;
 }
 
 .brand_name {
@@ -678,7 +779,7 @@ footer a {
     }
 }
 
-@media screen and (min-width: 51rem) {
+@media screen and (min-width: 70rem) {
     #bar {
         grid-template-columns: 0 0 min-content 1fr;
         grid-template-rows: var(--bar_height);

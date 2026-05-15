@@ -21,7 +21,7 @@ for (const liWithDropdown of liWithDropdownCollection) {
         // See dual_input.js: Any pointerdown event outside the currently open dropdown
         // closes it, regardless of device type.
         if (((!window.matchMedia("(hover: hover)").matches) ||
-            (!window.matchMedia("screen and (min-width: 51rem)").matches)) &&
+            (!window.matchMedia("screen and (min-width: 70rem)").matches)) &&
             (!event.composedPath().includes(dropdownMenu))) {
             liWithDropdown.classList.toggle("visible_dropdown");
         }
@@ -31,7 +31,7 @@ for (const liWithDropdown of liWithDropdownCollection) {
             (!event.composedPath().includes(menuHeading)) &&
             (this.classList.contains("active"))) {
             // On large hover screens: Hide the dropdown and restore it on pointer enter
-            if (window.matchMedia("screen and (min-width: 51rem) and (hover: hover)").matches) {
+            if (window.matchMedia("screen and (min-width: 70rem) and (hover: hover)").matches) {
                 // See dual_input.js
                 this.classList.remove("show_dropdown");
                 this.classList.remove("show_dropdown_hover_problem");
@@ -43,11 +43,11 @@ for (const liWithDropdown of liWithDropdownCollection) {
                 }, { once: true });
 
                 // On large touch screens: Hide dropdown
-            } else if (window.matchMedia("screen and (min-width: 51rem) and (hover: none)").matches) {
+            } else if (window.matchMedia("screen and (min-width: 70rem) and (hover: none)").matches) {
                 this.classList.remove("visible_dropdown");
 
                 // On narrow screens: Collapse the entire hamburger menu
-            } else if (!window.matchMedia("screen and (min-width: 51rem)").matches) {
+            } else if (!window.matchMedia("screen and (min-width: 70rem)").matches) {
                 removeMenu();
             }
         }

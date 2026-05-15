@@ -1,4 +1,4 @@
-@media screen and (min-width: 51rem) and (hover: hover) {
+@media screen and (min-width: 70rem) and (hover: hover) {
 
     /* Disable dropdown for active link. */
     /* Dropdown visibility on hover is restored on pointer move (see active_links.js) */

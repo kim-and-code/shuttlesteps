@@ -1,103 +1,35 @@
 "use strict";
 
-const playerArray = [];
-
-if (!window.YT) {
-    const scriptTag = document.createElement("script");
-    scriptTag.src = "https://www.youtube.com/iframe_api";
-    document.body.appendChild(scriptTag);
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", manageCards);
+} else {
+    manageCards();
 }
 
-const domReadyPromise = new Promise(resolve => {
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", resolve);
-    } else {
-        resolve();
-    }
-});
-
-const ytReadyPromise = new Promise(resolve => {
-    function checkYT() {
-        if (window.YT && window.YT.Player) {
-            resolve();
-        } else {
-            requestAnimationFrame(checkYT);
-        }
-    }
-    checkYT();
-});
-
-Promise.all([domReadyPromise, ytReadyPromise]).then(() => {
-    onDomAndYTReadyFunction();
-});
-
-// Reset player state and return to thumbnail view
-function pause(cP) {
-    cP.thumbnail.style.display = "block";
-    cP.iframe.style.display = "none";
-
-    if (cP.isReady) {
-        cP.player.pauseVideo();
-        cP.player.seekTo(0, true);
-    } else {
-        cP.pendingAction = "pause";
-    }
+// Return to thumbnail view
+function pause(cardObj) {
+    cardObj.video.pause();
+    cardObj.video.classList.remove("opaque");
 }
 
-// play video and pause and reset all other videos
-function play(cP) {
-    cP.thumbnail.style.display = "none";
-    cP.iframe.style.display = "block";
-
-    for (const pl of playerArray) {
-        if (pl !== cP) {
-            pause(pl);
-        }
-    }
-
-    if (cP.isReady) {
-        cP.player.playVideo();
-    } else {
-        cP.pendingAction = "play";
-    }
+// Play video
+function play(cardObj) {
+    cardObj.video.classList.add("opaque");
+    cardObj.video.play();
 }
 
 // TODO: Break this function into smaller functions
-function onDomAndYTReadyFunction() {
+function manageCards() {
     const grid = document.querySelector(".card_grid");
     const numElements = grid.childElementCount;
     for (let i = 0; i < numElements; i++) {
         const card = grid.children[i];
-        const thumbnail = card.querySelector(".thumbnail")
-        const iframe = card.querySelector(".video");
-
-        const cardPlayer = {
-            player: null,
-            thumbnail,
-            iframe,
-            isReady: false,
-            pendingAction: null,
+        const cardObject = {
+            element : card,
+            thumbnail: card.querySelector(".thumbnail"),
+            video: card.querySelector(".video"),
             hoverTimeout: null,
-        };
-
-        cardPlayer.player = new YT.Player(iframe, {
-            events: {
-                onReady: () => {
-                    cardPlayer.isReady = true;
-
-                    if (cardPlayer.pendingAction === "play") {
-                        play(cardPlayer);
-                    }
-                    if (cardPlayer.pendingAction === "pause") {
-                        pause(cardPlayer);
-                    }
-
-                    cardPlayer.pendingAction = null;
-                }
-            }
-        });
-
-        playerArray.push(cardPlayer);
+        }
 
         // TODO: Move callLeaveFunction, leaveFunction, enterFunction, and activateCard out of the loop
         // TODO: Replace inline styles with CSS classes
@@ -116,8 +48,8 @@ function onDomAndYTReadyFunction() {
             card.style.transform = "scale(1)";
             document.removeEventListener("pointerdown", callLeaveFunction);
             document.removeEventListener("pointermove", callLeaveFunction);
-            clearTimeout(cardPlayer.hoverTimeout);
-            pause(cardPlayer);
+            clearTimeout(cardObject.hoverTimeout);
+            pause(cardObject);
         }
 
         function enterFunction() {
@@ -136,20 +68,18 @@ function onDomAndYTReadyFunction() {
             const colCount = getColumnCount(grid);
             if (colCount > 1) {
                 setTransformOrigin(colCount, numElements, i, card);
-                card.style.transform = "scale(1.5)";
+                card.style.transform = "scale(1.25)";
             }
 
             // Ensure only one hover timeout is active
-            clearTimeout(cardPlayer.hoverTimeout);
-            cardPlayer.hoverTimeout = null;
+            clearTimeout(cardObject.hoverTimeout);
+            cardObject.hoverTimeout = null;
 
-            cardPlayer.hoverTimeout = setTimeout(() => {
-                if (cardPlayer.isReady) {
-                    play(cardPlayer);
-                } else {
-                    cardPlayer.pendingAction = "play";
-                }
-            }, 1000);
+            cardObject.video.currentTime = 0;
+
+            cardObject.hoverTimeout = setTimeout(() => {
+                play(cardObject);
+            }, 500);
         }
 
         function activateCard() {

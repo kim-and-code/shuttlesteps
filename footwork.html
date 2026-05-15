@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Badminton Footwork | ShuttleSteps</title>
     <link rel="icon" type="image/png" href="images/favicon.png">
-    <link rel="preload" href="/fonts/orbitron-v35-latin-800.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/orbitron-v35-latin-800.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/hover.css" media="screen and (min-width: 51rem) and (hover: hover)">
+    <link rel="stylesheet" href="css/hover.css" media="screen and (min-width: 70rem) and (hover: hover)">
     <script src="js/initialize_dark_mode.js"></script>
     <script src="js/custom_header.js"></script>
     <script src="js/custom_footer.js"></script>
+    <script src="js/custom_cookie_banner.js"></script>
     <script src="js/active_link.js"></script>
 </head>
 
@@ -282,8 +283,8 @@
                         Detailed footwork patterns for each area of the court are currently being added. The layout
                         below previews how these patterns will be organized.
                     </p>
-                    <button type="button" class="topics_button" id="expand_all_button">Expand all</button>
-                    <button type="button" class="topics_button" id="collapse_all_button">Collapse all</button>
+                    <button type="button" class="button topics_button" id="expand_all_button">Expand All</button>
+                    <button type="button" class="button topics_button" id="collapse_all_button">Collapse All</button>
                     <ul class="topics">
                         <li class="collapsed">
                             <div>
@@ -432,6 +433,8 @@
         </div>
 
         <custom-footer></custom-footer>
+
+        <custom-cookie-banner id="cookie_banner" class="hidden"></custom-cookie-banner>
     </div>
 
     <script src="js/main_bundle.js" type="module"></script>

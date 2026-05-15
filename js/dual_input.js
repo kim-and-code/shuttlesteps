@@ -29,7 +29,7 @@ let isDropdownRemoved = false;
 const linkCollection = document.querySelectorAll(".li_with_dropdown > a");
 for (const link of linkCollection) {
     link.addEventListener("click", function (e) {
-        if ((window.matchMedia("screen and (min-width: 51rem) and (hover: hover)").matches)) {
+        if ((window.matchMedia("screen and (min-width: 70rem) and (hover: hover)").matches)) {
             const parent = this.parentElement;
             if ((e.pointerType === "touch") && (!parent.classList.contains("show_dropdown")) &&
                 (!parent.isMouseOrPenOverLi)) {
@@ -99,7 +99,9 @@ for (const liWithDropdown of liWithDropdownCollection) {
             liWithDropdown.classList.remove("show_dropdown", "show_dropdown_hover_problem");
 
             // TODO: This does not handle dual-input and should be moved to menu_visibility.js.
-            liWithDropdown.classList.remove("visible_dropdown");
+            if (window.matchMedia("screen and (min-width: 70rem)").matches) {
+                liWithDropdown.classList.remove("visible_dropdown");
+            }
         }
     });
 }

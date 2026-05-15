@@ -5,6 +5,7 @@ class CustomFooter extends HTMLElement {
         this.innerHTML = `
             <footer>
                 <a href="privacy_policy.html">Privacy Policy</a>
+                <button type="button" id="cookie_reset_button" class="button">Review Privacy Settings</button>
             </footer>
         `;
     }

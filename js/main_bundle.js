@@ -1,5 +1,6 @@
 "use strict";
 
+import "./cookie_banner.js";
 import "./observe_root_font_size.js";
 import "./toggle_dark_mode.js";
 import "./menu_visibility.js";
