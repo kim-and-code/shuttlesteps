@@ -8,3 +8,4 @@ import "./resize.js";
 import "./dual_input.js";
 import "./prevent_FOUC_links.js";
 import "./place_dropdowns.js";
+import "./anchor_scrolling.js";

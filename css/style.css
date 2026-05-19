@@ -11,6 +11,8 @@
 }
 
 :root {
+    overflow-anchor: none;
+
     --bar_height: 4rem;
     /* Accounts for the 1px border-bottom because the navbar uses box-sizing: content-box */
     --ads_offset: calc(var(--bar_height) + 1px);
@@ -479,12 +481,8 @@ main {
     color: var(--main_text);
 }
 
-.anchor::before {
-    display: block;
-    content: "";
-    visibility: hidden;
-    height: var(--bar_and_anchor_offset);
-    margin-top: calc((-1) * var(--bar_and_anchor_offset));
+.anchor {
+    scroll-margin-top: var(--bar_and_anchor_offset);
 }
 
 .ads {
